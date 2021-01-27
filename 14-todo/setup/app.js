@@ -6,7 +6,7 @@ const submitBtn = document.querySelector(".submit-btn");
 const container = document.querySelector(".grocery-container");
 const list = document.querySelector(".grocery-list");
 const clearBtn = document.querySelector(".clear-btn");
-
+const karen = document.querySelector(".karen");
 
 // edit option
 let editElement;
@@ -26,8 +26,6 @@ function addItem(e){
   const id = new Date().getTime().toString();
   if(value && !editFlag){
     createListItem(id,value);
-    
-            
     displayAlert("item added to the list", "success");
     container.classList.add("show-container");
     addToLocalStorage(id,value);
@@ -77,7 +75,7 @@ function deleteItem(e){
   setBackToDefault();
 
   //remove from local storage
-  //removeFromLocalStorage(id);
+  removeFromLocalStorage(id);
 }
 //edit function
 function editItem(e){
