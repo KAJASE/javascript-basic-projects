@@ -6,7 +6,6 @@ const submitBtn = document.querySelector(".submit-btn");
 const container = document.querySelector(".grocery-container");
 const list = document.querySelector(".grocery-list");
 const clearBtn = document.querySelector(".clear-btn");
-const karen = document.querySelector(".karen");
 
 // edit option
 let editElement;
@@ -14,24 +13,26 @@ let editFlag = false;
 let editID = "";
 
 // ****** EVENT LISTENERS **********
-form.addEventListener('submit', addItem)
+form.addEventListener('submit', addOrEditItem)
 
 clearBtn.addEventListener('click', clearItems)
 
 window.addEventListener("DOMContentLoaded", setupItems);
 // ****** FUNCTIONS **********
-function addItem(e){
+function addOrEditItem(e){
   e.preventDefault();
   const value = grocery.value;
   const id = new Date().getTime().toString();
-  if(value && !editFlag){
+  const isAddition = (value && !editFlag);
+  const isEdit = (value && editFlag);
+  if(isAddition){
     createListItem(id,value);
     displayAlert("item added to the list", "success");
     container.classList.add("show-container");
     addToLocalStorage(id,value);
     setBackToDefault();
   }
-  else if(value && editFlag){
+  else if(isEdit){
     editElement.innerHTML = value;
     displayAlert('value changed', 'success');
     //edit local storage
